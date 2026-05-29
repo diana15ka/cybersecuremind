@@ -13,7 +13,7 @@ export default function WellbeingChat() {
 
     const res = await axios.post(
 
-      "http://127.0.0.1:8000/api/wellbeing-chat",
+      `${process.env.NEXT_PUBLIC_API_URL}/api/wellbeing-chat`,
 
       {
         message

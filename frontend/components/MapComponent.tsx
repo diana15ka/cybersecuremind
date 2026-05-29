@@ -16,7 +16,7 @@ export default function MapComponent({ currentThreat }: MapComponentProps) {
     setMapKey(Date.now());
 
     axios
-      .get("http://127.0.0.1:8000/api/telemetry")
+      .get(`${process.env.NEXT_PUBLIC_API_URL}/api/telemetry`)
       .then((res) => {
         setThreats(res.data || []);
       })
