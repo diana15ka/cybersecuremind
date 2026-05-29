@@ -1,4 +1,3 @@
-# Cybersecuremind
 # CyberSecureMind
 
 ## Autonomous Cybercrime Intelligence Platform
