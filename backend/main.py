@@ -12,8 +12,8 @@ from serp_api import search_domain
 from browser_api import analyze_browser_session
 from fraud_agent import analyze_fraud
 from compliance_agent import analyze_compliance
-from database import SessionLocal
-from models import ThreatLog
+from database import SessionLocal, engine
+from models import ThreatLog, Base
 from market_intelligence_agent import analyze_market_intelligence
 from finance_intelligence_agent import analyze_financial_intelligence
 from geo_intelligence_agent import analyze_geo_data
@@ -21,12 +21,12 @@ from telemetry_api import router as telemetry_router
 from wellbeing_agent import ai_support_chat
 from ai_reasoning_agent import classify_threat, generate_mitigation_advice
 
-
+Base.metadata.create_all(bind=engine)
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000","https://cybersecuremind-f55rf5has-diana-s-projects21.vercel.app"],
+    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000","cybersecuremind-14iug45hs-diana-s-projects21.vercel.app"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
