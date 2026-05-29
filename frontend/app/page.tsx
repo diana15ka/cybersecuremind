@@ -23,7 +23,7 @@ import {
   Briefcase,
 } from "lucide-react";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 const MapComponent = dynamic(() => import("../components/MapComponent"), {
   ssr: false,
@@ -53,7 +53,7 @@ export default function Home() {
     setReport(null);
 
     try {
-      const response = await axios.post("API_URL/api/investigate", {
+      const response = await axios.post(`${API_URL}/api/investigate`, {
         url: urlInput,
       });
 
