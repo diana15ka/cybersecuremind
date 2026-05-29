@@ -28,5 +28,11 @@ def get_telemetry():
 
         return data
 
+    except Exception as e:
+        return {
+            "telemetry_error": str(e),
+            "error_type": type(e).__name__
+        }
+
     finally:
         db.close()
