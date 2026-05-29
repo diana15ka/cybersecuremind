@@ -4,27 +4,29 @@ from models import ThreatLog
 
 router = APIRouter()
 
+
 @router.get("/api/telemetry")
-
 def get_telemetry():
-
     db = SessionLocal()
 
-    threats = db.query(ThreatLog).all()
+    try:
+        threats = db.query(ThreatLog).all()
 
-    data = []
+        data = []
 
-    for threat in threats:
+        for threat in threats:
+            data.append({
+                "url": threat.url,
+                "city": threat.city,
+                "country": threat.country,
+                "latitude": threat.latitude,
+                "longitude": threat.longitude,
+                "severity": threat.severity,
+                "fraud_score": threat.fraud_score,
+                "confidence": threat.confidence,
+            })
 
-        data.append({
-            "url": threat.url,
-            "city": threat.city,
-            "country": threat.country,
-            "latitude": threat.latitude,
-            "longitude": threat.longitude,
-            "severity": threat.severity,
-            "fraud_score": threat.fraud_score,
-            "confidence": threat.confidence
-        })
+        return data
 
-    return data
+    finally:
+        db.close()
