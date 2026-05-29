@@ -7,9 +7,9 @@ router = APIRouter()
 
 @router.get("/api/telemetry")
 def get_telemetry():
-    db = SessionLocal()
-
     try:
+        db = SessionLocal()
+
         threats = db.query(ThreatLog).all()
 
         data = []
@@ -26,6 +26,7 @@ def get_telemetry():
                 "confidence": threat.confidence,
             })
 
+        db.close()
         return data
 
     except Exception as e:
@@ -33,6 +34,3 @@ def get_telemetry():
             "telemetry_error": str(e),
             "error_type": type(e).__name__
         }
-
-    finally:
-        db.close()
